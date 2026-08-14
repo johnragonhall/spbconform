@@ -1,0 +1,79 @@
+[project]
+name = "spbconform"
+description = "Sparkplug B v3.0.0 conformance assertions and a runner for them. Standard library only, no dependencies."
+readme = "README.md"
+requires-python = ">=3.12"
+
+# Empty, and that is the feature. A conformance harness is installed to decide
+# whether something else is trustworthy, so every dependency it carries becomes
+# something a reviewer has to read and a security scanner has to clear. The
+# table is a tuple of tuples, the runner is dataclasses and callables, and the
+# command line is argparse and json. All of them ship with Python.
+dependencies = []
+
+# Read from the module, so __version__ and the distribution metadata are one
+# value and cannot disagree.
+dynamic = ["version"]
+
+license = "MIT"
+license-files = ["LICENSE"]
+
+authors = [{ name = "John Hall" }]
+keywords = ["sparkplug", "sparkplug-b", "mqtt", "conformance", "iiot", "scada"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Manufacturing",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Testing",
+    "Topic :: System :: Networking",
+    "Typing :: Typed",
+]
+
+[project.urls]
+Homepage = "https://github.com/johnragonhall/spbconform"
+
+[project.scripts]
+spbconform = "spbconform.cli:main"
+
+# Development only. Nothing here reaches a user who installs spbconform: the
+# distribution's own dependency list above stays empty, which is the point.
+[dependency-groups]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+
+[build-system]
+# 1.27 is where hatchling accepts the PEP 639 license fields above.
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "src/spbconform/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/spbconform"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src", "tests", "pyproject.toml", "README.md", "API.md", "LICENSE"]
+exclude = ["**/__pycache__", "**/*.py[co]", "**/.pytest_cache"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.lint.per-file-ignores]
+# The reference edge node exists to be broken on purpose, so the rule that
+# polices a boolean returned from a branch is off where a fault switch reads
+# more plainly written out.
+"tests/reference.py" = ["SIM210"]
+
+[tool.ruff.format]
+docstring-code-format = true

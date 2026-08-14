@@ -1,0 +1,18 @@
+# Build and test artifacts.
+#
+# This file also decides what an sdist carries. hatchling locates a .gitignore
+# by walking up from the project until it reaches .git, force-includes whichever
+# one it found, and consults no setting that can stop it. Keeping this one
+# accurate is therefore part of packaging, not just of local tidiness.
+
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+.venv/
+venv/
