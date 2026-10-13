@@ -1,5 +1,7 @@
 # spbconform
 
+[![CI](https://github.com/johnragonhall/spbconform/actions/workflows/ci.yml/badge.svg)](https://github.com/johnragonhall/spbconform/actions/workflows/ci.yml)
+
 The Eclipse Sparkplug B v3.0.0 assertion table, and a runner that checks your
 edge node against it. Zero dependencies, MIT, clean-room.
 
