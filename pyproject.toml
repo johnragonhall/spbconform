@@ -33,7 +33,7 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/johnragonhall/spbconform"
+Homepage = "https://github.com/ragonxdragon/spbconform"
 
 [project.scripts]
 spbconform = "spbconform.cli:main"

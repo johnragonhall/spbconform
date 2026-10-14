@@ -12,7 +12,7 @@ publisher). Enter exactly:
 | Field | Value |
 | --- | --- |
 | PyPI project name | `spbconform` |
-| Owner | `johnragonhall` |
+| Owner | `ragonxdragon` |
 | Repository name | `spbconform` |
 | Workflow name | `release.yml` |
 | Environment name | `pypi` |
